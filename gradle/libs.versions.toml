@@ -1,10 +1,14 @@
 [versions]
 agp = "8.3.0-alpha06"
-kotlin = "1.9.0"
-compose = "1.5.0"
+kotlin = "1.9.10"
+compose = "1.5.2"
 compose-compiler = "1.5.2"
-compose-material3 = "1.1.1"
+compose-material3 = "1.1.2"
 androidx-activityCompose = "1.7.2"
+ktor-plugin = "2.3.4"
+exposed = "0.44.0"
+h2 = "2.2.224"
+logback = "1.4.11"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -15,9 +19,24 @@ compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview"
 compose-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "compose" }
 compose-material3 = { module = "androidx.compose.material3:material3", version.ref = "compose-material3" }
 
+# Ktor
+ktor-server-core-jvm = { module = "io.ktor:ktor-server-core-jvm" }
+ktor-serialization-kotlinx-json-jvm = { module = "io.ktor:ktor-serialization-kotlinx-json-jvm" }
+ktor-server-content-negotiation-jvm = { module = "io.ktor:ktor-server-content-negotiation-jvm" }
+ktor-serialization-gson-jvm = { module = "io.ktor:ktor-serialization-gson-jvm" }
+ktor-server-auth-jvm = { module = "io.ktor:ktor-server-auth-jvm" }
+ktor-server-netty-jvm = { module = "io.ktor:ktor-server-netty-jvm" }
+ktor-server-tests-jvm = { module = "io.ktor:ktor-server-tests-jvm" }
+exposed-core = { module = "org.jetbrains.exposed:exposed-core", version.ref = "exposed" }
+exposed-jdbc = { module = "org.jetbrains.exposed:exposed-jdbc", version.ref = "exposed" }
+h2 = { module = "com.h2database:h2", version.ref = "h2" }
+logback = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
+junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
+
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
 kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
-kotlinCocoapods = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = "kotlin" }
+ktor = { id = "io.ktor.plugin", version.ref = "ktor-plugin" }
+serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }

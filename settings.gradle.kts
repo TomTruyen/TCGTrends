@@ -15,6 +15,7 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "TCGTrends"
+
 include(":android")
 include(":common")
 include(":api")
