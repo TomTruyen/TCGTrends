@@ -18,6 +18,8 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
@@ -25,6 +27,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.tomtruyen.tcgtrends.android.R
 import com.tomtruyen.tcgtrends.android.managers.ImageScanManager
 import kotlinx.coroutines.launch
@@ -34,16 +37,16 @@ import java.util.concurrent.ExecutionException
 fun ImageScanScreen() {
     val context = LocalContext.current
 
-    val scope = rememberCoroutineScope()
     val lifecycleOwner = LocalLifecycleOwner.current
 
     val cameraController = remember {
         LifecycleCameraController(context).apply {
             imageCaptureMode = ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY
-        }
+            imageAnalysisBackgroundExecutor = ImageScanManager.imageExecutor
+            setImageAnalysisAnalyzer(ImageScanManager.imageExecutor, ImageScanManager)}
     }
 
-    val scanManager = remember { ImageScanManager() }
+    val recognizedText by ImageScanManager.recognizedText.collectAsStateWithLifecycle()
 
     val launcher = rememberLauncherForActivityResult(
         ActivityResultContracts.RequestPermission()
@@ -61,6 +64,11 @@ fun ImageScanScreen() {
         }
     }
 
+    LaunchedEffect(recognizedText) {
+        Log.d("@@@", "Recognized Text: ${recognizedText?.text}")
+    }
+    // TODO: Add a clipped box for the camera
+
     AndroidView(
         modifier = Modifier.fillMaxSize(),
         factory = { ctx ->
@@ -73,27 +81,7 @@ fun ImageScanScreen() {
                 )
             }.also { previewView ->
                 previewView.controller = cameraController
-                cameraController.unbind()
                 cameraController.bindToLifecycle(lifecycleOwner)
-
-                // TODO: Find way to check if camera is active
-                cameraController.takePicture(
-                    ContextCompat.getMainExecutor(context),
-                    object: ImageCapture.OnImageCapturedCallback() {
-                        @ExperimentalGetImage
-                        override fun onCaptureSuccess(image: ImageProxy) {
-                            scope.launch {
-                                scanManager.process(image) {
-                                    Log.e("@@@", it ?: "Unknown Scan Error")
-                                }?.let { result ->
-                                    Log.d("@@@", result.text)
-                                }
-
-                                image.close()
-                            }
-                        }
-                    }
-                )
             }
         },
         onRelease = {

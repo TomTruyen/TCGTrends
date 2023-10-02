@@ -47,6 +47,7 @@ dependencies {
     debugImplementation(libs.compose.ui.tooling)
 
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.lifecycle.runtime.compose)
 
     // MLKit
     implementation(libs.mlkit.text.recognition)
@@ -56,4 +57,5 @@ dependencies {
     implementation(libs.camerax.camera2)
     implementation(libs.camerax.lifecycle)
     implementation(libs.camerax.view)
+
 }
