@@ -1,0 +1,22 @@
+version: '3.1'
+services:
+  database:
+    container_name: mariadb
+    restart: always
+    image: mariadb
+    environment:
+      MYSQL_DATABASE: 'tcgtrends'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'password'
+      MYSQL_ROOT_PASSWORD: 'password' 
+    ports:
+      - "3306:3306"
+    volumes:
+      - "./database-volume:/var/lib/mysql"
+  
+  adminer:
+    container_name: adminer
+    restart: always
+    image: adminer
+    ports:
+      - "9999:8080"

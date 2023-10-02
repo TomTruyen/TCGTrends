@@ -2,13 +2,17 @@
 agp = "8.3.0-alpha06"
 kotlin = "1.9.10"
 compose = "1.5.2"
-compose-compiler = "1.5.2"
+compose-compiler = "1.5.3"
 compose-material3 = "1.1.2"
 androidx-activityCompose = "1.7.2"
 ktor-plugin = "2.3.4"
 exposed = "0.44.0"
-h2 = "2.2.224"
 logback = "1.4.11"
+mysql-connector = "8.0.33"
+mlkit-text-recognition = "19.0.0"
+mlkit-text-recognition-jp = "16.0.0"
+camerax = "1.2.3"
+constraintlayout = "2.1.4"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -19,7 +23,7 @@ compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview"
 compose-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "compose" }
 compose-material3 = { module = "androidx.compose.material3:material3", version.ref = "compose-material3" }
 
-# Ktor
+# API
 ktor-server-core-jvm = { module = "io.ktor:ktor-server-core-jvm" }
 ktor-serialization-kotlinx-json-jvm = { module = "io.ktor:ktor-serialization-kotlinx-json-jvm" }
 ktor-server-content-negotiation-jvm = { module = "io.ktor:ktor-server-content-negotiation-jvm" }
@@ -29,9 +33,18 @@ ktor-server-netty-jvm = { module = "io.ktor:ktor-server-netty-jvm" }
 ktor-server-tests-jvm = { module = "io.ktor:ktor-server-tests-jvm" }
 exposed-core = { module = "org.jetbrains.exposed:exposed-core", version.ref = "exposed" }
 exposed-jdbc = { module = "org.jetbrains.exposed:exposed-jdbc", version.ref = "exposed" }
-h2 = { module = "com.h2database:h2", version.ref = "h2" }
+mysql-connector = { module = "mysql:mysql-connector-java", version.ref = "mysql-connector" }
 logback = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
 junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
+
+# Android
+androidx-constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintlayout" }
+mlkit-text-recognition = { module = "com.google.android.gms:play-services-mlkit-text-recognition", version.ref  = "mlkit-text-recognition" }
+mlkit-text-recognition-jp = { module = "com.google.android.gms:play-services-mlkit-text-recognition-japanese", version.ref  = "mlkit-text-recognition-jp" }
+camerax-camera2 = { module = "androidx.camera:camera-camera2", version.ref = "camerax" }
+camerax-lifecycle = { module = "androidx.camera:camera-lifecycle", version.ref = "camerax" }
+camerax-view = { module = "androidx.camera:camera-view", version.ref = "camerax" }
+
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

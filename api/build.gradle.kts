@@ -24,12 +24,14 @@ repositories {
 }
 
 dependencies {
+    implementation(projects.common)
+
     implementation(libs.ktor.server.core.jvm)
     implementation(libs.ktor.serialization.kotlinx.json.jvm)
     implementation(libs.ktor.server.content.negotiation.jvm)
     implementation(libs.exposed.core)
     implementation(libs.exposed.jdbc)
-    implementation(libs.h2)
+    implementation(libs.mysql.connector)
     implementation(libs.ktor.serialization.gson.jvm)
     implementation(libs.ktor.server.auth.jvm)
     implementation(libs.ktor.server.netty.jvm)
@@ -37,14 +39,8 @@ dependencies {
 
     testImplementation(libs.ktor.server.tests.jvm)
     testImplementation(libs.junit)
-
-    implementation(project(":common"))
 }
 
 tasks.test {
     useJUnitPlatform()
-}
-
-tasks.assemble {
-    dependsOn(":common:assemble")
 }

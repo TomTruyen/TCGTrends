@@ -5,6 +5,7 @@ plugins {
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
+    jvmToolchain(17)
     targetHierarchy.default()
 
     androidTarget {
@@ -15,18 +16,7 @@ kotlin {
         }
     }
 
-    jvm {
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = "17"
-            }
-        }
-
-        java {
-            sourceCompatibility = JavaVersion.VERSION_17
-            targetCompatibility = JavaVersion.VERSION_17
-        }
-    }
+    jvm()
 
     sourceSets {
         val commonMain by getting {
@@ -37,6 +27,16 @@ kotlin {
         val commonTest by getting {
             dependencies {
                 implementation(libs.kotlin.test)
+            }
+        }
+        val androidMain by getting {
+            dependencies {
+
+            }
+        }
+        val jvmMain by getting {
+            dependencies {
+
             }
         }
     }
