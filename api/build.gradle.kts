@@ -31,7 +31,7 @@ dependencies {
     implementation(libs.ktor.server.content.negotiation.jvm)
     implementation(libs.exposed.core)
     implementation(libs.exposed.jdbc)
-    implementation(libs.mysql.connector)
+    implementation(libs.mariadb.java.client)
     implementation(libs.ktor.serialization.gson.jvm)
     implementation(libs.ktor.server.auth.jvm)
     implementation(libs.ktor.server.netty.jvm)

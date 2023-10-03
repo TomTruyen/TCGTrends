@@ -9,11 +9,12 @@ import org.jetbrains.exposed.sql.*
 
 fun Application.configureDatabases() {
     val database = Database.connect(
-            url = "jdbc:mysql://localhost:3306/tcgtrends",
+            url = "jdbc:mariadb://localhost:3306/tcgtrends",
             user = "user",
-            driver = "com.mysql.cj.jdbc.Driver",
+            driver = "org.mariadb.jdbc.Driver",
             password = "password"
         )
+
     val userService = UserService(database)
     routing {
         // Create user

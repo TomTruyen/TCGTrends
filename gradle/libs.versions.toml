@@ -8,12 +8,12 @@ androidx-activityCompose = "1.7.2"
 ktor-plugin = "2.3.4"
 exposed = "0.44.0"
 logback = "1.4.11"
-mysql-connector = "8.0.33"
 mlkit-text-recognition = "19.0.0"
 mlkit-text-recognition-jp = "16.0.0"
 camerax = "1.2.3"
 constraintlayout = "2.1.4"
 lifecycle-runtime-compose = "2.6.2"
+mariadb-java-client = "3.2.0"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -34,7 +34,7 @@ ktor-server-netty-jvm = { module = "io.ktor:ktor-server-netty-jvm" }
 ktor-server-tests-jvm = { module = "io.ktor:ktor-server-tests-jvm" }
 exposed-core = { module = "org.jetbrains.exposed:exposed-core", version.ref = "exposed" }
 exposed-jdbc = { module = "org.jetbrains.exposed:exposed-jdbc", version.ref = "exposed" }
-mysql-connector = { module = "mysql:mysql-connector-java", version.ref = "mysql-connector" }
+mariadb-java-client = { module = "org.mariadb.jdbc:mariadb-java-client", version.ref = "mariadb-java-client" }
 logback = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
 junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
 
