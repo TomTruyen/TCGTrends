@@ -1,4 +1,4 @@
-package com.tomtruyen.tcgtrends.android
+package com.tomtruyen.tcgtrends.android.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.shape.RoundedCornerShape

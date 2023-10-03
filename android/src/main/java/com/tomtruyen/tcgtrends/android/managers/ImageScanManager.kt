@@ -20,16 +20,24 @@ import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
 object ImageScanManager: ImageAnalysis.Analyzer {
-    private val _recognizedText = MutableStateFlow(null as Text?)
-    val recognizedText = _recognizedText.asStateFlow()
-
-    val imageExecutor: ExecutorService = Executors.newSingleThreadExecutor()
+    private const val ANALYSIS_INTERVAL = 1000L
+    private var lastAnalysisTime: Long? = null
 
     private val recognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS)
     private val jpRecognizer = TextRecognition.getClient(JapaneseTextRecognizerOptions.Builder().build())
 
+    private val _recognizedText = MutableStateFlow(null as Text?)
+    val recognizedText = _recognizedText.asStateFlow()
+
     @ExperimentalGetImage
     override fun analyze(image: ImageProxy) {
+        if(!shouldAnalyze()) {
+            image.close()
+            return
+        }
+
+        lastAnalysisTime = System.currentTimeMillis()
+
         image.image?.let {
             val rotation = image.imageInfo.rotationDegrees
 
@@ -41,7 +49,13 @@ object ImageScanManager: ImageAnalysis.Analyzer {
                image.close()
            }
         }
+    }
 
+    private fun shouldAnalyze(): Boolean {
+        val currentTime = System.currentTimeMillis()
+        val lastAnalysisTime = lastAnalysisTime ?: 0
+
+        return currentTime - lastAnalysisTime >= ANALYSIS_INTERVAL
     }
 
     // Filters out the text that we don´t want
